@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kotostep · JLPT N5 ao N1 · Estudo Autodidata</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-blush: #FDF8F9;
+      --surface: #FFFFFF;
+      --pill-blush: #F7E4EA;
+      --pill-blush-hover: #F2D5DF;
+      --rose-accent: #C87D93;
+      --rose-deep: #9E566C;
+      --rose-track: #F3C6D4;
+      --border-soft: #EFE3E6;
+      --text-main: #2A2124;
+      --text-muted: #7C6B70;
+      --text-light: #A59398;
+      --success-bg: #EAF6EE;
+      --success-text: #2F6F47;
+      --shadow-card: 0 4px 20px rgba(200, 125, 147, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-blush);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      padding-bottom: 64px;
+    }
+
+    .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    .jp {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    /* Header */
+    header {
+      background: rgba(253, 248, 249, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-soft);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 18px 20px 14px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rose-accent);
+      font-size: 18px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .brand-title {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Pomodoro Timer Pill */
+    .timer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      box-shadow: var(--shadow-card);
+    }
+
+    .timer-btn {
+      background: var(--pill-blush);
+      border: none;
+      color: var(--rose-deep);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .timer-btn:hover { background: var(--pill-blush-hover); }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 15px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: rgba(247, 228, 234, 0.5);
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--surface);
+      border-color: var(--border-soft);
+      color: var(--text-main);
+      box-shadow: 0 2px 10px rgba(200, 125, 147, 0.08);
+    }
+
+    .tab-btn svg { color: var(--rose-accent); }
+
+    /* Progress bar */
+    .progress-strip {
+      height: 4px;
+      background: var(--pill-blush);
+      border-radius: 999px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--rose-track);
+      width: 20%;
+      transition: width 0.35s ease;
+      border-radius: 999px;
+    }
+
+    /* Main Container */
+    main {
+      max-width: 960px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.25s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Level Selector */
+    .level-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .level-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .level-pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--surface);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .level-pill.active {
+      background: var(--pill-blush);
+      border-color: var(--rose-track);
+      color: var(--rose-deep);
+    }
+
+    /* Cards (bunynotes style) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+
+    .study-card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .study-card:hover {
+      border-color: var(--rose-track);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .check-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-blush);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+
+    .check-circle.done {
+      background: var(--pill-blush);
+      border-color: var(--rose-accent);
+      color: var(--rose-deep);
+    }
+
+    .tag-pill {
+      display: inline-block;
+      background: var(--pill-blush);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-soft);
+    }
+
+    .meta-badge {
+      background: var(--pill-blush);
+      color: var(--text-main);
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+    }
+
+    .outline-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--surface);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .outline-btn:hover {
+      background: var(--pill-blush);
+      border-color: var(--rose-track);
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      background: var(--rose-accent);
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .primary-btn:hover { background: var(--rose-deep); }
+
+    /* Kana Grid & Canvas */
+    .kana-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 760px) {
+      .kana-layout { grid-template-columns: 1fr; }
+    }
+
+    .kana-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .kana-cell {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 10px 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .kana-cell:hover, .kana-cell.selected {
+      background: var(--pill-blush);
+      border-color: var(--rose-accent);
+    }
+
+    .kana-char {
+      font-size: 22px;
+      font-weight: 700;
+      display: block;
+      color: var(--text-main);
+    }
+
+    .kana-romaji {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .canvas-box {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+
+    canvas {
+      border: 1.5px dashed var(--rose-track);
+      border-radius: 16px;
+      background: var(--bg-blush);
+      touch-action: none;
+      cursor: crosshair;
+      margin: 12px auto;
+      display: block;
+    }
+
+    /* Flashcards */
+    .flashcard-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .flashcard {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 24px;
+      min-height: 260px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-card);
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: transform 0.2s;
+    }
+
+    .flashcard:hover { border-color: var(--rose-track); }
+
+    .fc-front {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    .fc-reading {
+      font-size: 16px;
+      color: var(--rose-deep);
+      font-weight: 600;
+    }
+
+    .fc-meaning {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .rating-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Listening & Speaking */
+    .lab-card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .mic-status {
+      font-size: 13px;
+      color: var(--rose-deep);
+      background: var(--pill-blush);
+      padding: 10px 14px;
+      border-radius: 12px;
+      margin-top: 12px;
+    }
+
+    /* Quiz */
+    .quiz-option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      background: var(--surface);
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .quiz-option:hover { background: var(--pill-blush); }
+    .quiz-option.correct { background: var(--success-bg); border-color: #8AC4A0; color: var(--success-text); font-weight: 600; }
+    .quiz-option.wrong { background: #FDEAEA; border-color: #E5A1A1; color: #9E3B3B; }
+
+    textarea.notes-area {
+      width: 100%;
+      min-height: 70px;
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 12.5px;
+      background: var(--bg-blush);
+      color: var(--text-main);
+      margin-top: 10px;
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="top-bar">
+        <div class="brand-group">
+          <div class="brand-badge jp">言</div>
+          <div>
+            <h1 class="brand-title serif">kotostep</h1>
+            <div class="brand-sub">JLPT N5 AO N1 · ESTUDO AUTODIDATA GRATUITO</div>
+          </div>
+        </div>
+
+        <div class="timer-pill" title="Cronômetro Pomodoro de Foco">
+          <span style="color: var(--rose-accent);">⏱</span>
+          <span id="timer-display">25:00</span>
+          <button class="timer-btn" id="timer-toggle">Iniciar</button>
+          <button class="timer-btn" id="timer-mode">50m</button>
+        </div>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="tab-btn active" data-tab="cronograma">
+          <span>📅</span> Cronograma & YouTube
+        </button>
+        <button class="tab-btn" data-tab="kana">
+          <span>あ</span> Hiragana & Katakana
+        </button>
+        <button class="tab-btn" data-tab="lab">
+          <span>🎧</span> Listening & Speaking
+        </button>
+        <button class="tab-btn" data-tab="flashcards">
+          <span>🗂️</span> Flashcards
+        </button>
+        <button class="tab-btn" data-tab="exercicios">
+          <span>✍️</span> Exercícios
+        </button>
+      </nav>
+
+      <div class="progress-strip">
+        <div class="progress-fill" id="overall-progress"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. CRONOGRAMA & YOUTUBE -->
+    <section id="tab-cronograma" class="section active">
+      <div class="level-bar">
+        <div class="level-pills" id="level-selector">
+          <button class="level-pill active" data-level="N5">JLPT N5 · Iniciante</button>
+          <button class="level-pill" data-level="N4">JLPT N4 · Básico</button>
+          <button class="level-pill" data-level="N3">JLPT N3 · Intermediário</button>
+          <button class="level-pill" data-level="N2">JLPT N2 · Avançado</button>
+          <button class="level-pill" data-level="N1">JLPT N1 · Proficiente</button>
+        </div>
+        <span style="font-size: 12px; color: var(--text-muted);" id="completed-counter">0 concluídos</span>
+      </div>
+
+      <div class="cards-grid" id="curriculum-grid"></div>
+    </section>
+
+    <!-- 2. HIRAGANA & KATAKANA -->
+    <section id="tab-kana" class="section">
+      <div class="level-bar">
+        <div class="level-pills">
+          <button class="level-pill active" id="btn-hiragana">Hiragana (ひらがな)</button>
+          <button class="level-pill" id="btn-katakana">Katakana (カタカナ)</button>
+        </div>
+        <span style="font-size: 12px; color: var(--text-muted);">Clique em um caractere para ouvir a pronúncia e treinar o traço</span>
+      </div>
+
+      <div class="kana-layout">
+        <div class="kana-grid" id="kana-grid"></div>
+
+        <div class="canvas-box">
+          <div class="card-kicker">CADERNO DE CALIGRAFIA</div>
+          <div class="jp" id="selected-kana-title" style="font-size: 48px; font-weight: 700; margin-top: 4px;">あ</div>
+          <div id="selected-kana-sub" style="font-size: 13px; color: var(--text-muted);">romaji: a</div>
+          <canvas id="draw-canvas" width="230" height="230"></canvas>
+          <div style="display: flex; gap: 8px; justify-content: center;">
+            <button class="outline-btn" style="width: auto;" id="speak-kana-btn">🔊 Ouvir</button>
+            <button class="outline-btn" style="width: auto;" id="clear-canvas-btn">🧹 Limpar traço</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. LISTENING & SPEAKING -->
+    <section id="tab-lab" class="section">
+      <div class="level-bar">
+        <span class="card-kicker">TREINO DE COMPREENSÃO AUDITIVA E SHADOWING</span>
+        <button class="outline-btn" style="width: auto;" id="next-phrase-btn">Próxima frase ↻</button>
+      </div>
+
+      <div class="lab-card">
+        <span class="tag-pill" id="lab-level-tag">N5 · Cotidiano</span>
+        <p class="jp" id="lab-jp" style="font-size: 28px; font-weight: 700; margin: 8px 0;">おはようございます。今日もよろしくお願いします。</p>
+        <p id="lab-romaji" style="font-size: 13px; color: var(--rose-deep); font-weight: 600;">Ohayō gozaimasu. Kyō mo yoroshiku onegaishimasu.</p>
+        <p id="lab-pt" style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Bom dia. Conto com você hoje também.</p>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;">
+          <button class="primary-btn" id="listen-normal-btn">🔊 Ouvir velocidade normal</button>
+          <button class="outline-btn" style="width: auto;" id="listen-slow-btn">🐢 Ouvir devagar (0.7x)</button>
+          <button class="outline-btn" style="width: auto;" id="record-speech-btn">🎙️ Testar minha pronúncia</button>
+        </div>
+
+        <div class="mic-status" id="speech-feedback">
+          Clique em <strong>"Testar minha pronúncia"</strong> para falar no microfone e comparar sua fala em japonês.
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. FLASHCARDS -->
+    <section id="tab-flashcards" class="section">
+      <div class="flashcard-wrap">
+        <div style="margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+          <span class="card-kicker" id="fc-counter">CARTÃO 1 DE 8</span>
+          <span class="meta-badge" id="fc-level-badge">N5</span>
+        </div>
+
+        <div class="flashcard" id="flashcard-box">
+          <span class="card-kicker" id="fc-side-label">FRENTE · CLIQUE PARA VIRAR</span>
+          <div class="jp fc-front" id="fc-jp">食べる</div>
+          <div id="fc-back" style="display: none;">
+            <div class="jp fc-reading" id="fc-reading">たべる · taberu</div>
+            <div class="fc-meaning" id="fc-meaning">Comer</div>
+            <p class="jp" id="fc-example" style="font-size: 13px; color: var(--text-muted); margin-top: 10px;">朝ごはんを食べます。</p>
+          </div>
+        </div>
+
+        <div class="rating-row">
+          <button class="outline-btn" style="width: auto;" onclick="nextCard('Revisar logo')">🔁 Difícil</button>
+          <button class="outline-btn" style="width: auto;" onclick="nextCard('Bom')">🌸 Bom</button>
+          <button class="primary-btn" onclick="nextCard('Dominado')">✨ Fácil</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. EXERCÍCIOS -->
+    <section id="tab-exercicios" class="section">
+      <div class="lab-card" style="max-width: 640px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span class="tag-pill" id="quiz-tag">JLPT N5 · Partículas</span>
+          <span class="card-kicker" id="quiz-score">ACERTOS: 0</span>
+        </div>
+        <h2 class="card-title" id="quiz-question">Qual partícula completa a frase: わたし（　）学生です。</h2>
+        <div id="quiz-options"></div>
+        <div id="quiz-feedback" style="font-size: 13px; color: var(--text-muted); margin-top: 10px;"></div>
+        <button class="outline-btn" style="margin-top: 14px;" id="next-quiz-btn">Próxima questão →</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Dados do Cronograma por Nível (N5 ao N1)
+    const curriculumData = {
+      N5: [
+        { id: 'n5-1', day: 'ETAPA 01 · BASE', tag: 'Escrita & Fonética', title: 'Hiragana, Katakana e Saudações Essenciais', goal: '92 caracteres + áudio', query: 'aula hiragana katakana japones iniciante' },
+        { id: 'n5-2', day: 'ETAPA 02 · GRAMÁTICA', tag: 'Partículas Básicas', title: 'Estrutura A は B です, Partículas は, が, を, に, で', goal: '25 frases modelo', query: 'particulas japones wa ga wo ni de aula' },
+        { id: 'n5-3', day: 'ETAPA 03 · VERBOS', tag: 'Conjugação N5', title: 'Forma Masu (ます), Presente, Passado e Negativo', goal: '30 verbos essenciais', query: 'verbos japones forma masu aula gratuita' },
+        { id: 'n5-4', day: 'ETAPA 04 · KANJI', tag: 'Primeiros 100 Kanji', title: 'Números, Dias da Semana, Tempo e Pessoas', goal: '100 kanji N5', query: 'kanji jlpt n5 aula completa portugues' }
+      ],
+      N4: [
+        { id: 'n4-1', day: 'ETAPA 01 · VERBOS', tag: 'Forma Te (て形)', title: 'Pedidos (~てください), Permissões e Ações Contínuas', goal: '30 exercícios de transformação', query: 'forma te japones te kudasai te iru aula' },
+        { id: 'n4-2', day: 'ETAPA 02 · REGISTRO', tag: 'Forma Dicionário & Nai', title: 'Linguagem Informal, Expressar Opiniões (~と思う)', goal: '20 diálogos curtos', query: 'forma dicionario japones nai forma informal' },
+        { id: 'n4-3', day: 'ETAPA 03 · DAR E RECEBER', tag: 'Ageru, Kureru, Morau', title: 'Verbos de Troca e Favores (~てあげる / ~てもらう)', goal: '15 situações práticas', query: 'ageru kureru morau japones explicacao' }
+      ],
+      N3: [
+        { id: 'n3-1', day: 'ETAPA 01 · CONEXÃO', tag: 'Gramática Intermediária', title: 'Causa, Contraste e Condicionais (~ば, ~たら, ~のに)', goal: '30 questões estilo JLPT', query: 'gramatica jlpt n3 condicionais ba tara noni' },
+        { id: 'n3-2', day: 'ETAPA 02 · VOZES VERBAIS', tag: 'Passiva e Causativa', title: 'Formas Passiva (~られる) e Causativa (~させる)', goal: '25 exercícios', query: 'voz passiva causativa japones jlpt n3' },
+        { id: 'n3-3', day: 'ETAPA 03 · LEITURA', tag: 'Compreensão de Texto', title: 'Leitura de Artigos Curtos e Vocabulário Abstrato', goal: '650 kanji acumulados', query: 'jlpt n3 reading practice listening' }
+      ],
+      N2: [
+        { id: 'n2-1', day: 'ETAPA 01 · FORMALIDADE', tag: 'Keigo (敬語)', title: 'Linguagem Honorífica, Modesta e Corporativa', goal: '25 expressões formais', query: 'keigo japones sonkeigo kenjougo aula' },
+        { id: 'n2-2', day: 'ETAPA 02 · NUANCES', tag: 'Estruturas Escritas N2', title: 'Conectivos Formais (~に違いない, ~を問わず, ~に際して)', goal: '40 questões', query: 'jlpt n2 grammar explanation listening' }
+      ],
+      N1: [
+        { id: 'n1-1', day: 'ETAPA 01 · PROFICIÊNCIA', tag: 'Retórica & Ensaios', title: 'Estruturas Literárias e Jornalísticas (~をもって, ~ざるを得ない)', goal: '50 questões avançadas', query: 'jlpt n1 grammar listening practice' },
+        { id: 'n1-2', day: 'ETAPA 02 · IMERSÃO TOTAL', tag: 'Noticiários & Debates', title: 'NHK News, Podcasts Nativos e Leitura Crítica', goal: '2.000+ kanji Jōyō', query: 'nhk japanese news listening shadowing' }
+      ]
+    };
+
+    let currentLevel = 'N5';
+    let completedIds = JSON.parse(localStorage.getItem('kotostep_done') || '[]');
+    let userNotes = JSON.parse(localStorage.getItem('kotostep_notes') || '{}');
+
+    function renderCurriculum() {
+      const grid = document.getElementById('curriculum-grid');
+      const items = curriculumData[currentLevel];
+      grid.innerHTML = items.map(item => {
+        const isDone = completedIds.includes(item.id);
+        const noteVal = userNotes[item.id] || '';
+        const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(item.query)}`;
+        return `
+          <article class="study-card">
+            <div>
+              <div class="card-top">
+                <span class="card-kicker">${item.day}</span>
+                <button class="check-circle ${isDone ? 'done' : ''}" onclick="toggleComplete('${item.id}')" title="Marcar como concluído">✓</button>
+              </div>
+              <span class="tag-pill">${item.tag}</span>
+              <h3 class="card-title">${item.title}</h3>
+            </div>
+            <div>
+              <div class="card-meta-row">
+                <span>🎯 Meta de estudo:</span>
+                <span class="meta-badge">${item.goal}</span>
+              </div>
+              <a class="outline-btn" href="${ytUrl}" target="_blank" rel="noopener">
+                ▶ Buscar Videoaula no YouTube
+              </a>
+              <textarea class="notes-area" placeholder="Anotações rápidas desta aula..." onchange="saveNote('${item.id}', this.value)">${noteVal}</textarea>
+            </div>
+          </article>
+        `;
+      }).join('');
+      updateProgress();
+    }
+
+    function toggleComplete(id) {
+      if (completedIds.includes(id)) {
+        completedIds = completedIds.filter(x => x !== id);
+      } else {
+        completedIds.push(id);
+      }
+      localStorage.setItem('kotostep_done', JSON.stringify(completedIds));
+      renderCurriculum();
+    }
+
+    function saveNote(id, text) {
+      userNotes[id] = text;
+      localStorage.setItem('kotostep_notes', JSON.stringify(userNotes));
+    }
+
+    function updateProgress() {
+      const total = Object.values(curriculumData).flat().length;
+      const pct = Math.round((completedIds.length / total) * 100);
+      document.getElementById('overall-progress').style.width = `${Math.max(8, pct)}%`;
+      document.getElementById('completed-counter').textContent = `${completedIds.length} de ${total} etapas concluídas`;
+    }
+
+    document.querySelectorAll('#level-selector .level-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#level-selector .level-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentLevel = btn.dataset.level;
+        renderCurriculum();
+      });
+    });
+
+    // Navegação por Abas
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+      });
+    });
+
+    // Cronômetro Pomodoro
+    let timerSeconds = 25 * 60;
+    let timerModeMinutes = 25;
+    let timerInterval = null;
+
+    function updateTimerUI() {
+      const m = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+      const s = String(timerSeconds % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `${m}:${s}`;
+    }
+
+    document.getElementById('timer-toggle').addEventListener('click', function() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        this.textContent = 'Iniciar';
+      } else {
+        this.textContent = 'Pausar';
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            updateTimerUI();
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            alert('Sessão de foco concluída! Hora de uma pausa rápida 🌸');
+          }
+        }, 1000);
+      }
+    });
+
+    document.getElementById('timer-mode').addEventListener('click', function() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      document.getElementById('timer-toggle').textContent = 'Iniciar';
+      timerModeMinutes = timerModeMinutes === 25 ? 50 : 25;
+      timerSeconds = timerModeMinutes * 60;
+      this.textContent = timerModeMinutes === 25 ? '50m' : '25m';
+      updateTimerUI();
+    });
+
+    // Síntese de Voz Japonês
+    function speakJP(text, rate = 1.0) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'ja-JP';
+      utter.rate = rate;
+      window.speechSynthesis.speak(utter);
+    }
+
+    // Hiragana & Katakana
+    const hiraganaList = [
+      ['あ','a'],['い','i'],['う','u'],['え','e'],['お','o'],
+      ['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko'],
+      ['さ','sa'],['し','shi'],['す','su'],['せ','se'],['そ','so'],
+      ['た','ta'],['ち','chi'],['つ','tsu'],['て','te'],['と','to'],
+      ['な','na'],['に','ni'],['ぬ','nu'],['ね','ne'],['の','no'],
+      ['は','ha'],['ひ','hi'],['ふ','fu'],['へ','he'],['ほ','ho'],
+      ['ま','ma'],['み','mi'],['む','mu'],['め','me'],['も','mo'],
+      ['や','ya'],['ゆ','yu'],['よ','yo'],['ら','ra'],['り','ri'],
+      ['る','ru'],['れ','re'],['ろ','ro'],['わ','wa'],['を','wo'],['ん','n']
+    ];
+
+    const katakanaList = [
+      ['ア','a'],['イ','i'],['ウ','u'],['エ','e'],['オ','o'],
+      ['カ','ka'],['キ','ki'],['ク','ku'],['ケ','ke'],['コ','ko'],
+      ['サ','sa'],['シ','shi'],['ス','su'],['セ','se'],['ソ','so'],
+      ['タ','ta'],['チ','chi'],['ツ','tsu'],['テ','te'],['ト','to'],
+      ['ナ','na'],['ニ','ni'],['ヌ','nu'],['ネ','ne'],['ノ','no'],
+      ['ハ','ha'],['ヒ','hi'],['フ','fu'],['ヘ','he'],['ホ','ho'],
+      ['マ','ma'],['ミ','mi'],['ム','mu'],['メ','me'],['モ','mo'],
+      ['ヤ','ya'],['ユ','yu'],['ヨ','yo'],['ラ','ra'],['リ','ri'],
+      ['ル','ru'],['レ','re'],['ロ','ro'],['ワ','wa'],['ヲ','wo'],['ン','n']
+    ];
+
+    let activeKanaChar = 'あ';
+
+    function renderKana(list) {
+      const grid = document.getElementById('kana-grid');
+      grid.innerHTML = list.map(([ch, ro]) => `
+        <div class="kana-cell jp" onclick="selectKana('${ch}', '${ro}')">
+          <span class="kana-char">${ch}</span>
+          <span class="kana-romaji">${ro}</span>
+        </div>
+      `).join('');
+    }
+
+    function selectKana(ch, ro) {
+      activeKanaChar = ch;
+      document.getElementById('selected-kana-title').textContent = ch;
+      document.getElementById('selected-kana-sub').textContent = `romaji: ${ro}`;
+      speakJP(ch);
+      clearCanvas();
+    }
+
+    document.getElementById('btn-hiragana').addEventListener('click', function() {
+      this.classList.add('active');
+      document.getElementById('btn-katakana').classList.remove('active');
+      renderKana(hiraganaList);
+    });
+
+    document.getElementById('btn-katakana').addEventListener('click', function() {
+      this.classList.add('active');
+      document.getElementById('btn-hiragana').classList.remove('active');
+      renderKana(katakanaList);
+    });
+
+    document.getElementById('speak-kana-btn').addEventListener('click', () => speakJP(activeKanaChar));
+
+    // Canvas de Caligrafia
+    const canvas = document.getElementById('draw-canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = '#EFE3E6';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 2, 0); ctx.lineTo(canvas.width / 2, canvas.height);
+      ctx.moveTo(0, canvas.height / 2); ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
+      ctx.strokeStyle = '#2A2124';
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'round';
+    }
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    canvas.addEventListener('mousedown', e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+    canvas.addEventListener('mousemove', e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+    window.addEventListener('mouseup', () => drawing = false);
+    canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+    canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+    window.addEventListener('touchend', () => drawing = false);
+    document.getElementById('clear-canvas-btn').addEventListener('click', clearCanvas);
+
+    // Listening & Speaking Lab
+    const phrases = [
+      { level: 'N5 · Cotidiano', jp: 'おはようございます。今日もよろしくお願いします。', ro: 'Ohayō gozaimasu. Kyō mo yoroshiku onegaishimasu.', pt: 'Bom dia. Conto com você hoje também.' },
+      { level: 'N4 · Conversação', jp: '日本の文化と歴史にとても興味があります。', ro: 'Nihon no bunka to rekishi ni totemo kyōmi ga arimasu.', pt: 'Tenho muito interesse na cultura e história do Japão.' },
+      { level: 'N3 · Opinião', jp: '毎日少しずつ勉強を続けることが大切だと思います。', ro: 'Mainichi sukoshi zutsu benkyō o tsuzukeru koto ga taisetsu da to omoimasu.', pt: 'Acho importante continuar estudando um pouco todos os dias.' },
+      { level: 'N2 · Formal', jp: 'お忙しいところ、お時間をいただきありがとうございます。', ro: 'O-isogashii tokoro, o-jikan o itadaki arigatō gozaimasu.', pt: 'Muito obrigado pelo seu tempo apesar de estar ocupado.' }
+    ];
+    let phraseIdx = 0;
+
+    function loadPhrase() {
+      const p = phrases[phraseIdx];
+      document.getElementById('lab-level-tag').textContent = p.level;
+      document.getElementById('lab-jp').textContent = p.jp;
+      document.getElementById('lab-romaji').textContent = p.ro;
+      document.getElementById('lab-pt').textContent = p.pt;
+    }
+
+    document.getElementById('next-phrase-btn').addEventListener('click', () => {
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+      loadPhrase();
+    });
+    document.getElementById('listen-normal-btn').addEventListener('click', () => speakJP(phrases[phraseIdx].jp, 1.0));
+    document.getElementById('listen-slow-btn').addEventListener('click', () => speakJP(phrases[phraseIdx].jp, 0.7));
+
+    document.getElementById('record-speech-btn').addEventListener('click', () => {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const fb = document.getElementById('speech-feedback');
+      if (!SpeechRec) {
+        fb.textContent = 'Seu navegador não suporta reconhecimento de voz nativo. Use Chrome ou Edge para testar o microfone.';
+        return;
+      }
+      const rec = new SpeechRec();
+      rec.lang = 'ja-JP';
+      fb.textContent = '🎙️ Ouvindo... fale a frase em japonês agora.';
+      rec.onresult = e => {
+        const transcript = e.results[0][0].transcript;
+        fb.innerHTML = `Você disse: <strong class="jp">${transcript}</strong>`;
+      };
+      rec.onerror = () => { fb.textContent = 'Não foi possível captar o áudio. Verifique a permissão do microfone.'; };
+      rec.start();
+    });
+
+    // Flashcards
+    const cards = [
+      { level: 'N5', jp: '食べる', read: 'たべる · taberu', mean: 'Comer', ex: '朝ごはんを食べます。' },
+      { level: 'N5', jp: '勉強する', read: 'べんきょうする · benkyō suru', mean: 'Estudar', ex: '毎日日本語を勉強します。' },
+      { level: 'N4', jp: '経験', read: 'けいけん · keiken', mean: 'Experiência', ex: 'いい経験になりました。' },
+      { level: 'N3', jp: '努力', read: 'どりょく · doryoku', mean: 'Esforço / Dedicação', ex: '彼女の努力が実を結んだ。' },
+      { level: 'N2', jp: '把握', read: 'はあく · haaku', mean: 'Compreensão / Domínio', ex: '状況を正確に把握する。' },
+      { level: 'N1', jp: '網羅', read: 'もうら · mōra', mean: 'Abranger por completo', ex: '全範囲を網羅した教材。' }
+    ];
+    let cardIdx = 0;
+
+    function renderCard() {
+      const c = cards[cardIdx];
+      document.getElementById('fc-counter').textContent = `CARTÃO ${cardIdx + 1} DE ${cards.length}`;
+      document.getElementById('fc-level-badge').textContent = c.level;
+      document.getElementById('fc-jp').textContent = c.jp;
+      document.getElementById('fc-reading').textContent = c.read;
+      document.getElementById('fc-meaning').textContent = c.mean;
+      document.getElementById('fc-example').textContent = c.ex;
+      document.getElementById('fc-back').style.display = 'none';
+      document.getElementById('fc-side-label').textContent = 'FRENTE · CLIQUE PARA VIRAR';
+    }
+
+    document.getElementById('flashcard-box').addEventListener('click', () => {
+      const back = document.getElementById('fc-back');
+      const visible = back.style.display === 'block';
+      back.style.display = visible ? 'none' : 'block';
+      document.getElementById('fc-side-label').textContent = visible ? 'FRENTE · CLIQUE PARA VIRAR' : 'VERSO · SIGNIFICADO';
+      if (!visible) speakJP(cards[cardIdx].jp);
+    });
+
+    function nextCard() {
+      cardIdx = (cardIdx + 1) % cards.length;
+      renderCard();
+    }
+
+    // Exercícios
+    const quizzes = [
+      { tag: 'JLPT N5 · Partículas', q: 'Qual partícula completa a frase: わたし（　）学生です。', opts: ['は (wa)', 'を (wo)', 'に (ni)', 'へ (e)'], ans: 0, exp: 'は (wa) marca o tópico da frase ("Quanto a mim, sou estudante").' },
+      { tag: 'JLPT N4 · Forma Te', q: 'Qual é a forma て (te-form) correta do verbo 読む (yomu - ler)?', opts: ['読みて', '読んで', '読って', '読んでる'], ans: 1, exp: 'Verbos terminados em む, ぶ, ぬ mudam para んで (読んで).' },
+      { tag: 'JLPT N3 · Gramática', q: 'Complete: 雨が降っている（　）、出かけます。', opts: ['のに (apesar de)', 'から (porque)', 'まで (até)', 'しか (apenas)'], ans: 0, exp: 'のに indica contraste inesperado: "Apesar de estar chovendo, vou sair".' },
+      { tag: 'JLPT N2 · Keigo', q: 'Qual é a forma honorífica (Sonkeigo) de 行く (ir)?', opts: ['いらっしゃる', 'まいる', 'いたす', 'うかがう'], ans: 0, exp: 'いらっしゃる é a expressão respeitosa para ir, vir ou estar.' }
+    ];
+    let quizIdx = 0;
+    let score = 0;
+    let answered = false;
+
+    function renderQuiz() {
+      answered = false;
+      const q = quizzes[quizIdx];
+      document.getElementById('quiz-tag').textContent = q.tag;
+      document.getElementById('quiz-question').textContent = q.q;
+      document.getElementById('quiz-feedback').textContent = '';
+      document.getElementById('quiz-options').innerHTML = q.opts.map((opt, i) => `
+        <button class="quiz-option" onclick="answerQuiz(${i}, this)">${opt}</button>
+      `).join('');
+    }
+
+    function answerQuiz(idx, btn) {
+      if (answered) return;
+      answered = true;
+      const q = quizzes[quizIdx];
+      const buttons = document.querySelectorAll('.quiz-option');
+      if (idx === q.ans) {
+        btn.classList.add('correct');
+        score++;
+        document.getElementById('quiz-score').textContent = `ACERTOS: ${score}`;
+      } else {
+        btn.classList.add('wrong');
+        buttons[q.ans].classList.add('correct');
+      }
+      document.getElementById('quiz-feedback').textContent = q.exp;
+    }
+
+    document.getElementById('next-quiz-btn').addEventListener('click', () => {
+      quizIdx = (quizIdx + 1) % quizzes.length;
+      renderQuiz();
+    });
+
+    // Inicialização
+    renderCurriculum();
+    renderKana(hiraganaList);
+    clearCanvas();
+    loadPhrase();
+    renderCard();
+    renderQuiz();
+  </script>
+</body>
+</html>
